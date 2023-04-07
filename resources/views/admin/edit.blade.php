@@ -12,12 +12,16 @@
                     @csrf
                     @method('PUT')
                     <div class="flex flex-wrap">
+
                         <div class="p-2 w-1/2">
                             <div class="relative">
                                 <label class="leading-7 text-sm text-gray-600" for="name">Nome do produto</label>
                                 <input
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                    id="name" name="name" type="text" value="{{ $product->name }}">
+                                    id="name" name="name" type="text" value="{{ old('name', $product->name) }}">
+                                @error('name')
+                                    <p class="text-red-400 text-sm">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
@@ -26,7 +30,11 @@
                                 <label class="leading-7 text-sm text-gray-600" for="name">Preço</label>
                                 <input
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                    id="price" name="price" type="text" value="{{ $product->price }}" />
+                                    id="price" name="price" type="text"
+                                    value="{{ old('price', $product->price) }}" />
+                                @error('price')
+                                    <p class="text-red-400 text-sm">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
@@ -35,7 +43,11 @@
                                 <label class="leading-7 text-sm text-gray-600" for="name">Estoque</label>
                                 <input
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                    id="stock" name="stock" type="text" value="{{ $product->stock }}">
+                                    id="stock" name="stock" type="text"
+                                    value="{{ old('stock', $product->stock) }}">
+                                @error('stock')
+                                    <p class="text-red-400 text-sm">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
@@ -45,7 +57,15 @@
                                 <input
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                                     id="cover" name="cover" type="file" />
+                                @error('cover')
+                                    <p class="text-red-400 text-sm">{{ $message }}</p>
+                                @enderror
                             </div>
+                        </div>
+
+                        <div class="p-2 w-full">
+                            <img alt="ecommerce" class="h-40 block mx-auto rounded"
+                                src="@if ($product->cover) {{ \Illuminate\Support\Facades\Storage::url($product->cover) }} @else https://placehold.co/600x400 @endif">
                         </div>
 
                         <div class="p-2 w-full">
@@ -53,7 +73,10 @@
                                 <label class="leading-7 text-sm text-gray-600" for="name">Descrição</label>
                                 <textarea
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                    id="description" name="description">{{ $product->description }}</textarea>
+                                    id="description" name="description">{{ old('description', $product->description) }}</textarea>
+                                @error('description')
+                                    <p class="text-red-400 text-sm">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 

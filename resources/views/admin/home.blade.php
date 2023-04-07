@@ -41,7 +41,14 @@
                                 <td class="px-4 py-3 text-sm text-right space-x-3 text-gray-900">
                                     <a class="mt-3 text-indigo-500 inline-flex items-center"
                                         href="{{ route('admin.product.edit', $product->id) }}">Editar</a>
-                                    <a class="mt-3 text-indigo-500 inline-flex items-center">Deletar</a>
+                                    <form action="{{ route('admin.product.destroy', $product->id) }}" method="POST"
+                                        onsubmit="return confirm('Deseja excluir esse produto?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="mt-3 text-indigo-500 inline-flex items-center" type="submit">
+                                            Deletar
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty

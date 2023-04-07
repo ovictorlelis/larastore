@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductStoreRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class AdminProductController extends Controller
@@ -19,17 +21,13 @@ class AdminProductController extends Controller
         return view('admin.edit', compact('product'));
     }
 
-    public function update(Product $product, Request $request)
+    public function update(Product $product, ProductStoreRequest $request)
     {
-        $input = $request->validate([
-            'name' => 'required|string',
-            'price' => 'string|nullable',
-            'stock' => 'integer|nullable',
-            'cover' => 'file|nullable',
-            'description' => 'string|required',
-        ]);
+        $input = $request->validated();
 
         if (!empty($input['cover']) && $input['cover']->isValid()) {
+            Storage::delete($product->cover ?? '');
+
             $file = $input['cover'];
             $path = $file->store('public/products');
             $input['cover'] = $path;
@@ -46,15 +44,9 @@ class AdminProductController extends Controller
         return view('admin.create');
     }
 
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
-        $input = $request->validate([
-            'name' => 'required|string',
-            'price' => 'string|nullable',
-            'stock' => 'integer|nullable',
-            'cover' => 'file|nullable',
-            'description' => 'string|required',
-        ]);
+        $input = $request->validated();
         $input['slug'] = Str::slug($input['name']);
 
         if (!empty($input['cover']) && $input['cover']->isValid()) {
@@ -65,6 +57,13 @@ class AdminProductController extends Controller
 
         Product::create($input);
 
+        return redirect()->route('admin.products');
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        Storage::delete($product->cover ?? '');
         return redirect()->route('admin.products');
     }
 }
