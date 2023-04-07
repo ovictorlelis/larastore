@@ -19,8 +19,26 @@ class AdminProductController extends Controller
         return view('admin.edit', compact('product'));
     }
 
-    public function update()
+    public function update(Product $product, Request $request)
     {
+        $input = $request->validate([
+            'name' => 'required|string',
+            'price' => 'string|nullable',
+            'stock' => 'integer|nullable',
+            'cover' => 'file|nullable',
+            'description' => 'string|required',
+        ]);
+
+        if (!empty($input['cover']) && $input['cover']->isValid()) {
+            $file = $input['cover'];
+            $path = $file->store('public/products');
+            $input['cover'] = $path;
+        }
+
+        $product->fill($input);
+        $product->save();
+
+        return redirect()->route('admin.product.edit', $product->id);
     }
 
     public function create()

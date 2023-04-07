@@ -33,7 +33,7 @@
                                 <td class="px-4 py-3">{{ $product->id }}</td>
                                 <td class="px-4 py-3">
                                     <img alt="ecommerce" class="object-cover object-center w-full h-full block"
-                                        src="{{ $product->cover }}">
+                                        src="@if ($product->cover) {{ \Illuminate\Support\Facades\Storage::url($product->cover) }} @else https://placehold.co/600x400 @endif">
                                 </td>
                                 <td class="px-4 py-3">{{ $product->name }}</td>
                                 <td class="px-4 py-3">R$ {{ $product->price }}</td>
