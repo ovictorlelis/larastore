@@ -15,7 +15,7 @@
                                 <label class="leading-7 text-sm text-gray-600" for="name">Nome do produto</label>
                                 <input
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                    id="name" name="name" type="text">
+                                    id="name" name="name" type="text" value="{{ $product->name }}">
                             </div>
                         </div>
 
@@ -24,7 +24,7 @@
                                 <label class="leading-7 text-sm text-gray-600" for="name">Preço</label>
                                 <input
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                    id="price" name="price" type="text" />
+                                    id="price" name="price" type="text" value="{{ $product->price }}" />
                             </div>
                         </div>
 
@@ -33,7 +33,7 @@
                                 <label class="leading-7 text-sm text-gray-600" for="name">Estoque</label>
                                 <input
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                    id="stock" name="stock" type="text">
+                                    id="stock" name="stock" type="text" value="{{ $product->stock }}">
                             </div>
                         </div>
 
@@ -51,7 +51,7 @@
                                 <label class="leading-7 text-sm text-gray-600" for="name">Descrição</label>
                                 <textarea
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                    id="description" name="description"></textarea>
+                                    id="description" name="description">{{ $product->description }}</textarea>
                             </div>
                         </div>
 

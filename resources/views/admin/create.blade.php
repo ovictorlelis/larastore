@@ -8,14 +8,18 @@
                     <h1 class="text-2xl font-medium title-font mb-2 text-gray-900">Adicionar produto</h1>
                 </div>
 
-                <form>
+                <form action="{{ route('admin.product.store') }}" enctype="multipart/form-data" method="POST">
+                    @csrf
                     <div class="flex flex-wrap">
                         <div class="p-2 w-1/2">
                             <div class="relative">
                                 <label class="leading-7 text-sm text-gray-600" for="name">Nome do produto</label>
                                 <input
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                    id="name" name="name" type="text">
+                                    id="name" name="name" type="text" value="{{ old('name') }}">
+                                @error('name')
+                                    <p class="text-red-400 text-sm">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
@@ -24,7 +28,10 @@
                                 <label class="leading-7 text-sm text-gray-600" for="name">Preço</label>
                                 <input
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                    id="price" name="price" type="text" />
+                                    id="price" name="price" type="text" value="{{ old('price') }}" />
+                                @error('price')
+                                    <p class="text-red-400 text-sm">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
@@ -33,7 +40,10 @@
                                 <label class="leading-7 text-sm text-gray-600" for="name">Estoque</label>
                                 <input
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                    id="stock" name="stock" type="text">
+                                    id="stock" name="stock" type="text" value="{{ old('stock') }}">
+                                @error('stock')
+                                    <p class="text-red-400 text-sm">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
@@ -43,6 +53,9 @@
                                 <input
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                                     id="cover" name="cover" type="file" />
+                                @error('cover')
+                                    <p class="text-red-400 text-sm">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
@@ -51,13 +64,19 @@
                                 <label class="leading-7 text-sm text-gray-600" for="name">Descrição</label>
                                 <textarea
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                                    id="description" name="description"></textarea>
+                                    id="description" name="description">{{ old('description') }}</textarea>
+                                @error('description')
+                                    <p class="text-red-400 text-sm">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="p-2 w-full">
                             <button
-                                class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Adicionar</button>
+                                class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+                                type="submit">
+                                Adicionar
+                            </button>
                         </div>
 
                     </div>
